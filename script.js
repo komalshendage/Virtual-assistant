@@ -1,49 +1,52 @@
+document.getElementById("reviewBtn").addEventListener("click", reviewCode);
+
 function reviewCode() {
     const code = document.getElementById("codeInput").value;
     const output = document.getElementById("output");
+
     output.innerHTML = "";
 
-    if (code.trim() === "") {
-        output.innerHTML = "⚠️ Please enter some code.";
+    if (!code.trim()) {
+        output.innerHTML = "<span class='error'>Please enter some code.</span>";
         return;
     }
 
     const lines = code.split("\n");
-    let feedback = [];
+    let messages = [];
 
-    // Rule 1: Long lines
+    // Rule 1: Line length
     lines.forEach((line, index) => {
         if (line.length > 80) {
-            feedback.push(`Line ${index + 1}: Line is too long.`);
+            messages.push(`Line ${index + 1}: Line exceeds 80 characters.`);
         }
     });
 
-    // Rule 2: No comments
+    // Rule 2: Comments
     if (!code.includes("//") && !code.includes("#")) {
-        feedback.push("No comments found. Consider adding comments.");
+        messages.push("No comments detected. Add comments to explain your code.");
     }
 
-    // Rule 3: Short variable names
+    // Rule 3: Variable naming
     lines.forEach((line, index) => {
         if (line.includes("=")) {
-            let variable = line.split("=")[0].trim();
-            if (variable.length === 1) {
-                feedback.push(`Line ${index + 1}: Variable name is too short.`);
+            const name = line.split("=")[0].trim();
+            if (name.length === 1) {
+                messages.push(`Line ${index + 1}: Avoid single-letter variable names.`);
             }
         }
     });
 
-    // Rule 4: Too many lines
+    // Rule 4: Code length
     if (lines.length > 50) {
-        feedback.push("Code is too long. Consider splitting into functions.");
+        messages.push("Code is long. Consider breaking it into smaller functions.");
     }
 
     // Display result
-    if (feedback.length === 0) {
-        output.innerHTML = "✅ Code looks clean and well written!";
+    if (messages.length === 0) {
+        output.innerHTML = "<span class='success'>✔ Code looks clean and well-structured.</span>";
     } else {
-        feedback.forEach(item => {
-            output.innerHTML += "❌ " + item + "<br>";
+        messages.forEach(msg => {
+            output.innerHTML += `<div class='error'>✖ ${msg}</div>`;
         });
     }
 }

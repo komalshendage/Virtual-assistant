@@ -1,21 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>AI Code Reviewer</title>
-    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Code Reviewer for Beginners</title>
+
+    <meta name="description"
+        content="AI Code Reviewer for Beginners – analyze code quality and receive instant feedback using AI-like logic." />
+
+    <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-<div class="container">
-    <h1>🤖 AI Code Reviewer</h1>
+<header>
+    <h1>AI Code Reviewer for Beginners</h1>
+    <p>Analyze your code and improve coding standards</p>
+</header>
 
-    <textarea id="codeInput" placeholder="Paste your code here..."></textarea>
+<main class="container">
+    <section class="editor">
+        <label for="codeInput">Paste Your Code</label>
+        <textarea id="codeInput" placeholder="Paste your JavaScript or Python code here..."></textarea>
+        <button id="reviewBtn">Review Code</button>
+    </section>
 
-    <button onclick="reviewCode()">Review Code</button>
+    <section class="results">
+        <h2>Review Results</h2>
+        <div id="output" class="output">No review yet.</div>
+    </section>
+</main>
 
-    <div id="output"></div>
-</div>
+<footer>
+    <p>© 2025 AI Code Reviewer for Beginners</p>
+</footer>
 
 <script src="script.js"></script>
 </body>
